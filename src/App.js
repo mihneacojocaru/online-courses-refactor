@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Layout from './components/Layout';
+import DetailsPage from './pages/DetailsPage';
+import MainPage from './pages/MainPage';
+import PageNotFound from './pages/PageNotFound';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import AddNewCoursePage from './pages/AddNewCoursePage';
 
-function App() {
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { useStateContext } from './context/Context';
+
+
+
+const App = () => {
+
+  const {user} = useStateContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+        <Layout>
+            <Switch>
+                <Route exact path="/" component={MainPage}/>
+                <Route path="/details/:id" component={DetailsPage} />
+                <Route path='/signIn'>
+                    {user ? <Redirect to='/'/> : <SignInPage/>}
+                </Route>
+                <Route path='/signUp'>
+                    {user ? <Redirect to='/'/> : <SignUpPage/>}
+                </Route>
+                <Route path='/newCourse' component={AddNewCoursePage} />
+                <Route path="*" component={PageNotFound} />
+            </Switch>
+        </Layout>
+    </Router>
+  )
 }
 
-export default App;
+export default App
