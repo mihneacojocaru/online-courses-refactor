@@ -26,7 +26,7 @@ export default function MainPage() {
     let d = await courseApi.getCourses();
     setCourses(d);
   };
-
+  
   useEffect(() => {
     getCourses();
   }, []);
@@ -47,7 +47,7 @@ export default function MainPage() {
         </div>
       )}
 
-      {courses ? (
+      {courses.length !== 0 ? (
         <div className="cards-container py-10 grid justify-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5 ">
           {
             courses.map((el, index)=>(
@@ -70,7 +70,7 @@ export default function MainPage() {
         </div>
       ) : (
         <div>
-          <div className="py-5 pb-10 flex items-center">
+          <div className="py-10 px-7 pb-10 flex items-center">
             <Spinner />
             <p>No Courses to show at the moment</p>
           </div>

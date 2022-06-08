@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from './components/Layout';
 import DetailsPage from './pages/DetailsPage';
+import UpdatePage from './pages/UpdatePage'
 import MainPage from './pages/MainPage';
 import PageNotFound from './pages/PageNotFound';
 import SignInPage from './pages/SignInPage';
@@ -22,6 +23,9 @@ const App = () => {
             <Switch>
                 <Route exact path="/" component={MainPage}/>
                 <Route path="/details/:id" component={DetailsPage} />
+                <Route path="/updateCourse/:id">
+                    {user ? <UpdatePage/> : <Redirect to='/'/>}
+                </Route>
                 <Route path='/signIn'>
                     {user ? <Redirect to='/'/> : <SignInPage/>}
                 </Route>
@@ -30,6 +34,7 @@ const App = () => {
                 </Route>
                 <Route path='/newCourse' component={AddNewCoursePage} />
                 <Route path="*" component={PageNotFound} />
+                <Route path="/404Page" component={PageNotFound} />
             </Switch>
         </Layout>
     </Router>
