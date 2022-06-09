@@ -51,8 +51,7 @@ const UpdatePage = () => {
   }, []);
 
   useEffect(()=>{
-    let x = Object.values(errors).filter(e=>e!=='').length
-    console.log(x)
+    let x = Object.values(errors).filter(e=>e!=='').length;
     setTotalErrors(x)
   },[errors])
 
@@ -115,9 +114,7 @@ const UpdatePage = () => {
   }
 
   const submitFunction = async () => { 
-    console.log(totalErrors)
-    
-    if(totalErrors === 1230){
+    if(totalErrors === 0){
       const data = new Data();
       await data.updateCourseDetails(id, details, user.token);
       await data.updateCourse(id, course, user.token);
@@ -158,7 +155,8 @@ const UpdatePage = () => {
     useEffect(() => {
         setActionsBar(true);
         setActionsBarChildren(actionButtons);
-    }, [course,details]);
+        errorsHandle();
+    }, [course,details,totalErrors]);
     
 
   return (

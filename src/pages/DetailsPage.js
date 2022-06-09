@@ -135,7 +135,7 @@ const DetailsPage = () => {
           <h2 className="text-center md:text-left text-2xl font-semibold py-4">
             Prerequisites
           </h2>
-          <div className="flex flex-col items-center lg:items-start">
+          <div className="flex flex-col items-start">
             {prerequisites ?
             prerequisites.map((item,index)=>(
               <span key={index} className="flex items-center text-2xl text-yellow-600 mb-2">
